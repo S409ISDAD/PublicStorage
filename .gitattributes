@@ -1,0 +1,2 @@
+*.h5 filter=lfs diff=lfs merge=lfs -text
+Desktop[[:space:]]2024.02.21[[:space:]]-[[:space:]]01.15.17.04.mp4 filter=lfs diff=lfs merge=lfs -text
