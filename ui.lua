@@ -121,8 +121,11 @@ function Library:Create(title, titleColor)
     mainContent.Size = UDim2.new(1, -160, 1, -55)
     mainContent.Parent = mainFrame
     
-    -- Dragging
-    local dragging, dragInput, dragStart, startPos
+    -- Dragging variables
+    local dragging = false
+    local dragInput = nil
+    local dragStart = nil
+    local startPos = nil
     local isMinimized = false
     local originalSize = mainFrame.Size
     
