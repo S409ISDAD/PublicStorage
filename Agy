@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Checks for the Antigravity CLI (agy), installs it if missing, then launches it.
+set -euo pipefail
+
+# The official installer puts agy in ~/.local/bin, which may not be on PATH yet
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v agy >/dev/null 2>&1; then
+    echo "Antigravity CLI (agy) not found. Installing..."
+
+    if ! command -v curl >/dev/null 2>&1; then
+        sudo apt update && sudo apt install -y curl
+    fi
+
+    curl -fsSL https://antigravity.google/cli/install.sh | bash
+    hash -r
+
+    if ! command -v agy >/dev/null 2>&1; then
+        echo "Install finished but agy still isn't on PATH. Check ~/.local/bin." >&2
+        exit 1
+    fi
+    echo "Installed: $(agy --version 2>/dev/null || echo 'agy')"
+fi
+
+exec agy --dangerously-skip-permissions "$@"
